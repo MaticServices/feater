@@ -15,7 +15,7 @@ import {
 })
 export class InstanceListComponent implements OnInit {
 
-    instances: GetInstanceListQueryInstanceFieldItemInterface[];
+    instances: GetInstanceListQueryInstanceFieldItemInterface[] = [];
 
     constructor(
         protected route: ActivatedRoute,
