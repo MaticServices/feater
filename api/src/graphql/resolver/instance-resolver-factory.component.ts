@@ -94,6 +94,11 @@ export class InstanceResolverFactory {
     public getCreateItemResolver(): (obj: any, createInstanceInput: CreateInstanceInputTypeInterface) => Promise<InstanceTypeInterface> {
         return async (obj: any, createInstanceInput: CreateInstanceInputTypeInterface): Promise<InstanceTypeInterface> => {
             // TODO Add validation.
+            const instanceCount = await this.instanceRepository.countAll();
+
+            if (instanceCount >= environment.instantiation.instanceLimit) {
+                throw new Error(`Limit Exceeded. Cannot create more than ${environment.instantiation.instanceLimit} instances.`);
+            }
 
             const instance = await this.instanceRepository.create(createInstanceInput);
             const definition = await this.definitionRepository.findByIdOrFail(instance.definitionId);

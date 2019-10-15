@@ -22,6 +22,7 @@ export interface EnvironmentInterface {
         readonly containerNamePrefix: string; // TODO Rename to composeProjectNamePrefix.
         readonly proxyDomainPattern: string;
         readonly proxyDomainsNetworkName: string;
+        readonly instanceLimit: number;
     };
     readonly logger: {
         readonly console: {

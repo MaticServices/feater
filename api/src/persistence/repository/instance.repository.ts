@@ -28,6 +28,10 @@ export class InstanceRepository {
         return query.exec();
     }
 
+    countAll(): Promise<number> {
+        return this.instanceModel.count({}).exec();
+    }
+
     findById(id: string): Promise<InstanceInterface> {
         return this.instanceModel.findById(id).exec();
     }
