@@ -31,6 +31,8 @@ export class InstanceAddComponent implements OnInit {
 
     item: InstanceAddForm;
 
+    instanceLimitExceeded: string = null;
+
     definition: GetDefinitionQueryDefinitionFieldInterface;
 
     instantiationActions: { id: string; name: string; type: string; }[] = [];
@@ -51,6 +53,7 @@ export class InstanceAddComponent implements OnInit {
     }
 
     addItem(instantiationActionId: string) {
+        this.instanceLimitExceeded = null;
         this.apollo.mutate({
             mutation: this.createInstanceMutation,
             variables: {
@@ -64,6 +67,9 @@ export class InstanceAddComponent implements OnInit {
             },
             (error) => {
                 console.log(error);
+                if (Object.keys(error).indexOf('graphQLErrors') !== -1) {
+                    this.instanceLimitExceeded = error.graphQLErrors[0].message
+                }
             }
         );
     }

@@ -24,6 +24,7 @@ export const environment: EnvironmentInterface = {
         containerNamePrefix: 'featerinstance',
         proxyDomainPattern: `{instance_hash}-{port_id}.my-feater-host`,
         proxyDomainsNetworkName: 'feater_proxy', // Value of COMPOSE_PROJECT_NAME is prepended by default.
+        instanceLimit: 10,
     },
     logger: {
         console: {
